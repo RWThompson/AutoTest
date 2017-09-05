@@ -44,7 +44,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Sep 4, 2017 04:20:55 PM</span>
+                    <span class='label suite-start-time blue darken-3'>Sep 5, 2017 01:50:44 PM</span>
 				</a>
 			</li>
 			<li>
@@ -70,6 +70,7 @@
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
 											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -120,10 +121,10 @@
 					<canvas id='parent-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>1</span> test(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='50%'><span class='strong'>1</span> test(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='50%'>1</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -135,10 +136,10 @@
 					<canvas id='child-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='14.286%'><span class='strong'>1</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='7.692%'><span class='strong'>1</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='85.714%'>6</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='7.692%'>1</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='84.615%'>11</span> others
 				</div>
 			</div>
 		</div>
@@ -155,15 +156,15 @@
 				
 				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>myTest</span>
-						<span class='test-time'>Sep 4, 2017 04:20:58 PM</span>
+						<span class='test-name'>extentReportTest2</span>
+						<span class='test-time'>Sep 5, 2017 01:50:48 PM</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Sep 4, 2017 04:20:58 PM</span>
-	<span class='label end-time'>Sep 4, 2017 04:20:59 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 1s+542ms</span>
+	<span class='label start-time'>Sep 5, 2017 01:50:48 PM</span>
+	<span class='label end-time'>Sep 5, 2017 01:50:49 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 1s+812ms</span>
 </div>
 	<div class='test-steps'>
 		<table class='bordered table-results'>
@@ -177,42 +178,109 @@
 			<tbody>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>4:20:58 PM</td>
+					<td class='timestamp'>1:50:48 PM</td>
 					<td class='step-details'>opening the website "thedemosite.co.uk"</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>4:20:58 PM</td>
+					<td class='timestamp'>1:50:49 PM</td>
 					<td class='step-details'>moving to the "add user" page</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>4:20:59 PM</td>
+					<td class='timestamp'>1:50:49 PM</td>
 					<td class='step-details'>creating a user</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>4:20:59 PM</td>
+					<td class='timestamp'>1:50:49 PM</td>
 					<td class='step-details'>moving to the "login" page</td>
 				</tr>
 				<tr class='log' status='info'>
 					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>4:20:59 PM</td>
+					<td class='timestamp'>1:50:49 PM</td>
 					<td class='step-details'>entering the login details created previously</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>4:20:59 PM</td>
-					<td class='step-details'>checking that the login was successful</td>
 				</tr>
 				<tr class='log' status='pass'>
 					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-					<td class='timestamp'>4:20:59 PM</td>
+					<td class='timestamp'>1:50:49 PM</td>
 					<td class='step-details'>Login test successful</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:50:49 PM</td>
+					<td class='step-details'>checking that the login was successful</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>extentReportTest</span>
+						<span class='test-time'>Sep 5, 2017 01:50:52 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Sep 5, 2017 01:50:52 PM</span>
+	<span class='label end-time'>Sep 5, 2017 01:50:54 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 1s+628ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:50:52 PM</td>
+					<td class='step-details'>opening the website "thedemosite.co.uk"</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:50:53 PM</td>
+					<td class='step-details'>moving to the "add user" page</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:50:53 PM</td>
+					<td class='step-details'>creating a user</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:50:53 PM</td>
+					<td class='step-details'>moving to the "login" page</td>
+				</tr>
+				<tr class='log' status='info'>
+					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
+					<td class='timestamp'>1:50:54 PM</td>
+					<td class='step-details'>entering the login details created previously</td>
+				</tr>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>1:50:54 PM</td>
+					<td class='step-details'>Failed test</td>
+				</tr>
+				<tr class='log' status='debug'>
+					<td class='status debug' title='debug' alt='debug'><i class='material-icons'>low_priority</i></td>
+					<td class='timestamp'>1:50:54 PM</td>
+					<td class='step-details'>expected:<**[Failed] Login**> but was:<**[Successful] Login**></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+							<ul class='screenshots'>
+								<li><img data-featherlight='C:\Users\Administrator\IdeaProjects\autotesting\report\screenshots\testSS0.jpg' width='10%' src='C:\Users\Administrator\IdeaProjects\autotesting\report\screenshots\testSS0.jpg' data-src='C:\Users\Administrator\IdeaProjects\autotesting\report\screenshots\testSS0.jpg'></li>
+							</ul>
 					</div>
 				</li>
 			</ul>
@@ -250,31 +318,31 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Tests
-					<div class='panel-lead'>1</div>
+					<div class='panel-lead'>2</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>7</div>
+					<div class='panel-lead'>13</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Sep 4, 2017 04:20:55 PM</div>
+					<div class='panel-lead'>Sep 5, 2017 01:50:44 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Sep 4, 2017 04:21:00 PM</div>
+			 		<div class='panel-lead'>Sep 5, 2017 01:50:55 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>4,879ms</div>
+					<div class='panel-lead'>10,394ms</div>
 				</div>
 			</div>
 		</div>
@@ -288,21 +356,21 @@
 		<script>
 			var statusGroup = {
 				passParent: 1,
-				failParent: 0,
+				failParent: 1,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 0,
+				exceptionsParent: 1,
 				
 				passChild: 1,
-				failChild: 0,
+				failChild: 1,
 				fatalChild: 0,
 				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
-				infoChild: 6,
-				exceptionsChild: 0,
+				infoChild: 11,
+				exceptionsChild: 2,
 				
 				passGrandChild: 0,
 				failGrandChild: 0,
