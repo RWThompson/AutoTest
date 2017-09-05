@@ -33,7 +33,7 @@ public class loginTest {
     @BeforeClass
     public static void init(){
         String property = System.getProperty("user.dir");
-        ReportDetails reportDetails = new ReportDetails(property + "\\TestReport",
+        ReportDetails reportDetails = new ReportDetails(property + "\\LoginTestReport",
                 "Basic Extent Report","Basic Report");
 //        reportDetails.setTheme(Theme.DARK);
         reportManager = new ExtentReportManager(ExtentReportManager.ReportType.HTML,reportDetails);
@@ -63,7 +63,6 @@ public class loginTest {
             logTest.fail("Failed test");
             logTest.debug(e.getMessage());
             try {
-                //test.addScreenCaptureFromPath(ScreenShot.take(driver, "reports"+ File.separatorChar +"screenshots"+File.separatorChar +"test-screenshot-" + screenShotCount++));
                 logTest.addScreenCaptureFromPath(ScreenShot.take(webDriver, "report" + File.separatorChar + "screenshots" + File.separatorChar + "testSS" + ssCount++));
             } catch (IOException exe) {
                 logTest.info("Failed to take screen shot");
