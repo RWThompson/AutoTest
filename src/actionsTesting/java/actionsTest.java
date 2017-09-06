@@ -1,6 +1,7 @@
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import org.junit.*;
+import org.junit.runner.manipulation.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -515,5 +516,18 @@ public class actionsTest {
             logLevelTest.debug(e.getMessage());
             Assert.fail();
         }
+    }
+
+    @Test
+    public void defaultSortableTest() {
+        ExtentTest logLevelTest = reportManager.setUpTest();
+        logLevelTest.log(Status.INFO, "opening the website \"http://demoqa.com\"");
+        driver.navigate().to("http://demoqa.com/");
+        PageFactory.initElements(driver, Home.class);
+        PageFactory.initElements(driver, SortablePage.class);
+
+        int sY = Draggable.consDrag3.getLocation().y;
+        int y = SortablePage.sortableItem1.
+        builder.moveToElement(SortablePage.sortableItem1).dragAndDropBy(SortablePage.sortableItem1, 0, 35);
     }
 }
