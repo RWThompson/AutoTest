@@ -6,8 +6,8 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by Administrator on 06/09/2017.
  */
-public class Selectable {
+public class Sortable {
 
-    @FindBy(css = "#selectable > li:nth-child(1)")
-    public static WebElement selectItem1;
+    @FindBy(css = "#sortable > li:nth-child(1)")
+    public static WebElement sortableItem1;
 }

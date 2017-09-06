@@ -6,10 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import pages.Droppable;
-import pages.Home;
-import pages.Draggable;
-import pages.Resizable;
+import org.openqa.selenium.support.ui.Select;
+import pages.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -482,7 +480,36 @@ public class actionsTest {
         try {
             assertEquals(expH, endHeight);
             assertEquals(expW, endWidth);
-            logLevelTest.pass("Resizeable Height Function Passed");
+            logLevelTest.pass("Resizeable Both Function Passed");
+        } catch (AssertionError e) {
+            logLevelTest.fail("Failed test");
+            logLevelTest.debug(e.getMessage());
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void defaultSelectTest() {
+        ExtentTest logLevelTest = reportManager.setUpTest();
+        logLevelTest.log(Status.INFO, "opening the website \"http://demoqa.com\"");
+        driver.navigate().to("http://demoqa.com/");
+        PageFactory.initElements(driver, Home.class);
+        PageFactory.initElements(driver, Selectable.class);
+
+        builder.moveToElement(Home.selectPage).click().perform();
+        builder.moveToElement(Selectable.selectItem1).click().perform();
+        String act = Selectable.selectItem1.getAttribute("class");
+        String exp = "ui-widget-content ui-corner-left ui-selectee ui-selected";
+
+        try {
+            logLevelTest.addScreenCaptureFromPath(ScreenShot.take(driver, "src" + File.separatorChar + "actionsTesting" + File.separatorChar + "java" + File.separatorChar + "screenshots" + File.separatorChar + "testSS" + ssCount++));
+        } catch (IOException exe) {
+            logLevelTest.info("Failed to take screen shot");
+            logLevelTest.debug(exe.getMessage());
+        }
+        try {
+            assertEquals(exp, act);
+            logLevelTest.pass("Default Selectable Function Passed");
         } catch (AssertionError e) {
             logLevelTest.fail("Failed test");
             logLevelTest.debug(e.getMessage());
