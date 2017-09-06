@@ -31,10 +31,4 @@ public class Draggable {
 
     @FindBy(id = "drag")
     public static WebElement cDrag1;
-
-    @FindBy(id = "drag2")
-    public static WebElement cDrag2;
-
-    @FindBy(id = "drag3")
-    public static WebElement cDrag3;
 }
