@@ -526,8 +526,28 @@ public class actionsTest {
         PageFactory.initElements(driver, Home.class);
         PageFactory.initElements(driver, SortablePage.class);
 
-        int sY = Draggable.consDrag3.getLocation().y;
-        int y = SortablePage.sortableItem1.
-        builder.moveToElement(SortablePage.sortableItem1).dragAndDropBy(SortablePage.sortableItem1, 0, 35);
+        builder.moveToElement(Home.sortPage).click().perform();
+
+        builder.moveToElement(SortablePage.sortableItem1).clickAndHold(SortablePage.sortableItem1).perform();
+        builder.moveByOffset(0,34).perform();
+        builder.release().perform();
+        String act = SortablePage.sortableItem2.getText();
+        String exp = "Item 1";
+
+
+        try {
+            logLevelTest.addScreenCaptureFromPath(ScreenShot.take(driver, "src" + File.separatorChar + "actionsTesting" + File.separatorChar + "java" + File.separatorChar + "screenshots" + File.separatorChar + "testSS" + ssCount++));
+        } catch (IOException exe) {
+            logLevelTest.info("Failed to take screen shot");
+            logLevelTest.debug(exe.getMessage());
+        }
+        try {
+            assertEquals(exp, act);
+            logLevelTest.pass("Default Sortable Function Passed");
+        } catch (AssertionError e) {
+            logLevelTest.fail("Failed test");
+            logLevelTest.debug(e.getMessage());
+            Assert.fail();
+        }
     }
 }

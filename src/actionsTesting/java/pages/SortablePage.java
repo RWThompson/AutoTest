@@ -10,4 +10,10 @@ public class SortablePage {
 
     @FindBy(css = "#sortable > li:nth-child(1)")
     public static WebElement sortableItem1;
+
+    @FindBy(css = "#sortable > li:nth-child(2)")
+    public static WebElement sortableItem2;
+//
+//    #sortable > li:nth-child(1)
+//        #sortable > li:nth-child(2)
 }
