@@ -10,9 +10,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import pages.HomePage;
 import pages.ContactPage;
+import pages.SignUp;
 
 import java.io.File;
 import java.io.IOException;
@@ -98,6 +100,11 @@ public class advShoppingTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void select(WebElement el, String value) {
+        Select select = new Select(el);
+        select.selectByValue(value);
     }
 
     @Test
@@ -222,16 +229,86 @@ public class advShoppingTest {
         PageFactory.initElements(driver, HomePage.class);
         PageFactory.initElements(driver, ContactPage.class);
 
+        logLevelTest.log(Status.INFO, "Clicking the contact form link");
         builder.moveToElement(HomePage.contactLink).click().perform();
+        logLevelTest.log(Status.INFO, "Clicking the select department box");
         builder.moveToElement(ContactPage.contSelect).click().perform();
-        builder.moveToElement(ContactPage.selDept).click().perform();
-        builder.moveToElement(ContactPage.contEmail).sendKeys(ContactPage.contEmail, "testR" + System.currentTimeMillis() + "@testR.com");
-        builder.moveToElement(ContactPage.msg).sendKeys(ContactPage.msg, "Message to be sent to customer serivces");
+        timeout(2);
+        logLevelTest.log(Status.INFO, "Selecting a department to send a message to");
+        select(ContactPage.contSelect, "2");
+        logLevelTest.log(Status.INFO, "Moving to the email box and entering an email");
+        builder.moveToElement(ContactPage.contEmail).sendKeys(ContactPage.contEmail, "testR" + System.currentTimeMillis() + "@testR.com").perform();
+        logLevelTest.log(Status.INFO, "Clicking the message box and entering a message");
+        builder.moveToElement(ContactPage.msg).sendKeys(ContactPage.msg, "Message to be sent to customer serivces").perform();
+        logLevelTest.log(Status.INFO, "Clicking the submit button to submit the message");
         builder.moveToElement(ContactPage.sendMsg).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 3 seconds for the status message to appear");
         timeout(3);
+        logLevelTest.log(Status.INFO, "Retrieving the contents of the status message");
         String act = ContactPage.successCont.getText();
         String exp = "Your message has been successfully sent to our team.";
 
+
+        try {
+            logLevelTest.addScreenCaptureFromPath(ScreenShot.take(driver, "src" + File.separatorChar + "shoppingAdvanced"  + File.separatorChar + "screenshots" + File.separatorChar + "testSS" + ssCount++));
+        } catch (IOException exe) {
+            logLevelTest.info("Failed to take screen shot");
+            logLevelTest.debug(exe.getMessage());
+        }
+        try {
+            assertEquals(exp, act);
+            logLevelTest.pass("Add to cart from home Function Passed");
+        } catch (AssertionError e) {
+            logLevelTest.fail("Failed test");
+            logLevelTest.debug(e.getMessage());
+            logLevelTest.error(e.toString());
+            logLevelTest.error(e.fillInStackTrace());
+            e.printStackTrace();
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void testSignUp() {
+        ExtentTest logLevelTest = reportManager.setUpTest();
+        logLevelTest.log(Status.INFO, "opening the website \"http://automationpractice.com/index.php\"");
+        driver.navigate().to("http://automationpractice.com/index.php");
+        PageFactory.initElements(driver, HomePage.class);
+        PageFactory.initElements(driver, SignUp.class);
+
+        logLevelTest.log(Status.INFO, "Clicking the sign up link");
+        builder.moveToElement(HomePage.signUp).click().perform();
+        logLevelTest.log(Status.INFO, "Entering an email for the sign up");
+        builder.moveToElement(HomePage.signUpEmail).sendKeys(HomePage.signUpEmail, "testR" + System.currentTimeMillis() + "@testR.com").perform();
+        logLevelTest.log(Status.INFO, "Clicking the submit button to sign up");
+        builder.moveToElement(HomePage.signUpSubmit).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting for 3 seconds for the web page to load");
+        timeout(3);
+        logLevelTest.log(Status.INFO, "Entering a first name");
+        builder.moveToElement(SignUp.fname).sendKeys(SignUp.fname, "test");
+        logLevelTest.log(Status.INFO, "Entering a surname");
+        builder.moveToElement(SignUp.sname).sendKeys(SignUp.sname, "test");
+        logLevelTest.log(Status.INFO, "Entering a password");
+        builder.moveToElement(SignUp.pass).sendKeys(SignUp.pass, "test1234");
+        logLevelTest.log(Status.INFO, "Entering the first line of the address");
+        builder.moveToElement(SignUp.addLine1).sendKeys(SignUp.addLine1, "1 Test Road");
+        logLevelTest.log(Status.INFO, "Entering the city");
+        builder.moveToElement(SignUp.city).sendKeys(SignUp.city, "Test");
+        logLevelTest.log(Status.INFO, "Clicking on the select box to select a state");
+        builder.moveToElement(SignUp.stateSel).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting for 2 seconds for the options to load");
+        timeout(2);
+        logLevelTest.log(Status.INFO, "Selecting California");
+        select(SignUp.stateSel, "5");
+        logLevelTest.log(Status.INFO, "Entering a postcode");
+        builder.moveToElement(SignUp.postcode).sendKeys(SignUp.postcode, "12345");
+        logLevelTest.log(Status.INFO, "Entering a mobile number");
+        builder.moveToElement(SignUp.mobile).sendKeys(SignUp.mobile, "01234567891");
+        logLevelTest.log(Status.INFO, "Clicking the submit button");
+        builder.moveToElement(SignUp.submit).click().perform();
+        logLevelTest.log(Status.INFO, "Retrieving the current URL to make sure it has been redirected to the account management page");
+        String act = driver.getCurrentUrl();
+        String exp = "http://automationpractice.com/index.php?controller=my-account";
 
         try {
             logLevelTest.addScreenCaptureFromPath(ScreenShot.take(driver, "src" + File.separatorChar + "shoppingAdvanced"  + File.separatorChar + "screenshots" + File.separatorChar + "testSS" + ssCount++));

@@ -40,4 +40,13 @@ public class HomePage {
 
     @FindBy(css = "#contact-link > a")
     public static WebElement contactLink;
+
+    @FindBy(css = "#header > div.nav > div > div > nav > div.header_user_info > a")
+    public static WebElement signUp;
+
+    @FindBy(id = "email_create")
+    public static WebElement signUpEmail;
+
+    @FindBy(css = "#SubmitCreate > span")
+    public static WebElement signUpSubmit;
 }
