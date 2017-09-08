@@ -306,8 +306,9 @@ public class advShoppingTest {
         builder.moveToElement(SignUp.mobile).sendKeys(SignUp.mobile, "01234567891");
         logLevelTest.log(Status.INFO, "Clicking the submit button");
         builder.moveToElement(SignUp.submit).click().perform();
-        logLevelTest.log(Status.INFO, "Retrieving the current URL to make sure it has been redirected to the account management page");
+        logLevelTest.log(Status.INFO, "Retrieving the current url of the web page");
         String act = driver.getCurrentUrl();
+
         String exp = "http://automationpractice.com/index.php?controller=my-account";
 
         try {
