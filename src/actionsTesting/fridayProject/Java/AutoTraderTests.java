@@ -7,13 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import sun.security.krb5.internal.LoginOptions;
-import webPages.AutoTraderHome;
-import webPages.CreateSaleAd;
-import webPages.LoginPage;
+import webPages.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +31,7 @@ public class AutoTraderTests {
     private WebDriver driver;
     private static ExtentReportManager reportManager;
     private static int ssCount = 0;
+    private String drive = "chrome";
 
     @BeforeClass
     public static void init(){
@@ -44,7 +44,13 @@ public class AutoTraderTests {
 
     @Before
     public void setup() {
-        driver = new ChromeDriver();
+        switch (drive) {
+            case "chrome": driver = new ChromeDriver();
+                break;
+            case "firefox": driver = new FirefoxDriver();
+                break;
+        }
+        //driver = new ChromeDriver();
         builder = new Actions(driver);
     }
 
@@ -61,7 +67,7 @@ public class AutoTraderTests {
     private void assertTest(String exp, String act) {
         ExtentTest logLevelTest = reportManager.setUpTest();
         try {
-            logLevelTest.addScreenCaptureFromPath(ScreenShot.take(driver, "src" + File.separatorChar + "FridayProject"  + File.separatorChar + "screenshots" + File.separatorChar + "testSS" + ssCount++));
+            logLevelTest.addScreenCaptureFromPath(ScreenShot.take(driver, "src" + File.separatorChar + "actionsTesting" + File.separatorChar + "fridayProject"  + File.separatorChar + "screenshots" + File.separatorChar + "testSS" + ssCount++));
         } catch (IOException exe) {
             logLevelTest.info("Failed to take screen shot");
             logLevelTest.debug(exe.getMessage());
@@ -232,9 +238,143 @@ public class AutoTraderTests {
         builder.moveToElement(LoginPage.submit).click().perform();
         logLevelTest.log(Status.INFO, "Waiting 2 seconds for the user details page to load");
         waiter(2);
-        
+
         String act = driver.findElement(By.tagName("body")).getAttribute("id");
         String exp = "myAccountDetails";
+        assertTest(exp, act);
+    }
+
+    @Test
+    public void testAboutUsLink() {
+        ExtentTest logLevelTest = reportManager.setUpTest();
+        logLevelTest.log(Status.INFO, "Opening the website \"http://www.autotrader.co.uk/\"");
+        driver.navigate().to("http://www.autotrader.co.uk/");
+        PageFactory.initElements(driver, AutoTraderHome.class);
+
+        logLevelTest.log(Status.INFO, "Clicking the about us link");
+        builder.moveToElement(AutoTraderHome.aboutUs).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting for 2 seconds so the page can load");
+        waiter(2);
+
+        logLevelTest.log(Status.INFO, "Retrieving the current URL");
+        String act = driver.getCurrentUrl();
+        String exp = "http://about-us.autotrader.co.uk/";
+        assertTest(exp, act);
+    }
+
+    @Test
+    public void findClosestCarDealer() {
+        ExtentTest logLevelTest = reportManager.setUpTest();
+        logLevelTest.log(Status.INFO, "Opening the website \"http://www.autotrader.co.uk/\"");
+        driver.navigate().to("http://www.autotrader.co.uk/");
+        PageFactory.initElements(driver, AutoTraderHome.class);
+        PageFactory.initElements(driver, CarDealerPage.class);
+
+        logLevelTest.log(Status.INFO, "Clicking the find car dealer link");
+        builder.moveToElement(AutoTraderHome.findCarDealer).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 2 seconds for the page to load");
+        waiter(2);
+        logLevelTest.log(Status.INFO, "Entering the postcode");
+        builder.moveToElement(CarDealerPage.postcode).sendKeys(CarDealerPage.postcode, "M50 3YJ").perform();
+        logLevelTest.log(Status.INFO, "Clicking the search car dealers button");
+        builder.moveToElement(CarDealerPage.submit).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 2 seconds for the page to load");
+        waiter(2);
+
+        logLevelTest.log(Status.INFO, "Retrieving the current URL");
+        String act = driver.getCurrentUrl();
+        String exp = "http://www.autotrader.co.uk/car-dealers/search?advertising-location=at_cars&postcode=m503yj&radius=1500&forSale=on&toOrder=on&page=1&sort=with-retailer-reviews";
+        assertTest(exp, act);
+    }
+
+    @Test
+    public void findReviewsForCertainCar() {
+        ExtentTest logLevelTest = reportManager.setUpTest();
+        logLevelTest.log(Status.INFO, "Opening the website \"http://www.autotrader.co.uk/car-reviews\"");
+        driver.navigate().to("http://www.autotrader.co.uk/car-reviews");
+        PageFactory.initElements(driver, AutoTraderHome.class);
+        PageFactory.initElements(driver, ReviewPage.class);
+
+        logLevelTest.log(Status.INFO, "Clicking on the make select box");
+        builder.moveToElement(ReviewPage.make).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 2 seconds for the page to load");
+        waiter(2);
+        logLevelTest.log(Status.INFO, "Selecting the Ford option");
+        select(ReviewPage.make, "ford");
+        logLevelTest.log(Status.INFO, "Clicking the model select box");
+        builder.moveToElement(ReviewPage.model).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 2 seconds for the page to load");
+        waiter(2);
+        logLevelTest.log(Status.INFO, "Selecting the Fiesta option");
+        select(ReviewPage.model, "fiesta");
+        logLevelTest.log(Status.INFO, "Clicking the body select box");
+        builder.moveToElement(ReviewPage.body).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 2 seconds for the page to load");
+        waiter(2);
+        logLevelTest.log(Status.INFO, "Selecting the body of the car");
+        select(ReviewPage.body, "fed14112d8d03a2a3ace17379f4e5579");
+        logLevelTest.log(Status.INFO, "Clicking on the search button");
+        builder.moveToElement(ReviewPage.search).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 2 seconds for the page to load");
+        waiter(2);
+
+        logLevelTest.log(Status.INFO, "Retrieving the current URL");
+        String act = driver.getCurrentUrl();
+        String exp = "http://www.autotrader.co.uk/car-reviews/ford/fiesta/fed14112d8d03a2a3ace17379f4e5579";
+        assertTest(exp, act);
+    }
+
+    @Test
+    public void searchOnlyNewCarsWithin10Miles() {
+        ExtentTest logLevelTest = reportManager.setUpTest();
+        logLevelTest.log(Status.INFO, "Opening the website \"http://www.autotrader.co.uk/\"");
+        driver.navigate().to("http://www.autotrader.co.uk/");
+        PageFactory.initElements(driver, AutoTraderHome.class);
+
+        logLevelTest.log(Status.INFO, "Entering the postcode into the search area");
+        builder.moveToElement(AutoTraderHome.postcode).sendKeys(AutoTraderHome.postcode, "M50 3YJ").perform();
+        logLevelTest.log(Status.INFO, "Clicking on the select distance drop down");
+        builder.moveToElement(AutoTraderHome.distance).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 2 seconds for the drop down menu to appear");
+        waiter(2);
+        logLevelTest.log(Status.INFO, "Selecting 10 miles in the drop down menu");
+        select(AutoTraderHome.distance, "10");
+
+        logLevelTest.log(Status.INFO, "Turning off searching for used cars");
+        builder.moveToElement(AutoTraderHome.searchUsed).click().perform();
+        logLevelTest.log(Status.INFO, "Turning off searching for nearly new cars");
+        builder.moveToElement(AutoTraderHome.searchNearlyNew).click().perform();
+
+        logLevelTest.log(Status.INFO, "Clicking the search button");
+        builder.moveToElement(AutoTraderHome.searchBut).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 2 seconds for the page to load");
+        waiter(2);
+
+        logLevelTest.log(Status.INFO, "Retrieving the current URL");
+        String act = driver.getCurrentUrl();
+        String exp = "https://www.autotrader.co.uk/car-search?postcode=m503yj&radius=10&onesearchad=New&search-target=usedcars&is-quick-search=true&quicksearch=true";
+        assertTest(exp, act);
+    }
+
+    @Test
+    public void viewAllPrestigiousCars() {
+        ExtentTest logLevelTest = reportManager.setUpTest();
+        logLevelTest.log(Status.INFO, "Opening the website \"http://www.autotrader.co.uk/\"");
+        driver.navigate().to("http://www.autotrader.co.uk/");
+        PageFactory.initElements(driver, AutoTraderHome.class);
+
+        logLevelTest.log(Status.INFO, "Clicking the prestigious cars link");
+        builder.moveToElement(AutoTraderHome.prestigiousCars).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 2 seconds for the page to load");
+        waiter(2);
+        logLevelTest.log(Status.INFO, "Clicking the see all button");
+        builder.moveToElement(AutoTraderHome.seeAllPretiious).click().perform();
+        logLevelTest.log(Status.INFO, "Waiting 2 seconds for the page to load");
+        waiter(2);
+
+        logLevelTest.log(Status.INFO, "Retrieving the current URL");
+        String act = driver.getCurrentUrl();
+        String exp = "https://www.autotrader.co.uk/car-search?sort=price-desc";
         assertTest(exp, act);
     }
 }

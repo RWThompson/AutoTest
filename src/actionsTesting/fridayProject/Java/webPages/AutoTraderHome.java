@@ -38,4 +38,22 @@ public class AutoTraderHome {
 
     @FindBy(css = "#js-header-nav > ul > li.test-header__nav-listing.u-float-right > div.is-not-signed-in > a")
     public static WebElement signIn;
+
+    @FindBy(css = "#home > div.white-footer > footer > div > nav:nth-child(1) > section.footer__nav-corporate > ul > li.footer__nav-listing.footer__nav-listing--1 > a")
+    public static WebElement aboutUs;
+
+    @FindBy(css = "#js-editorial-content > section.alt-search__nav > a:nth-child(3) > span")
+    public static WebElement findCarDealer;
+
+    @FindBy(css = "#searchVehicles > div > div.global__quicksearchform--tickboxes.cf > fieldset.checkfieldused > label")
+    public static WebElement searchUsed;
+
+    @FindBy(css = "#searchVehicles > div > div.global__quicksearchform--tickboxes.cf > fieldset.checkfieldnearlynew > label")
+    public static WebElement searchNearlyNew;
+
+    @FindBy(css = "#home > header > nav.site-header__other-vehicles.js-peek-nav.is-active > ul > li:nth-child(2) > a")
+    public static WebElement prestigiousCars;
+
+    @FindBy(css = "body > div.tm-content > div.topmarques-content > a")
+    public static WebElement seeAllPretiious;
 }
